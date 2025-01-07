@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML5 Elements Example</title>
+</head>
+<body>
+    <h1>Form with HTML5 Elements</h1>
+    
+    <form action="/submit" method="post">
+        <!-- Text Box -->
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+        <br><br>
+
+        <!-- Radio Buttons -->
+        <fieldset>
+            <legend>Gender</legend>
+            <input type="radio" id="male" name="gender" value="male" required>
+            <label for="male">Male</label>
+            <br>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label>
+            <br>
+            <input type="radio" id="other" name="gender" value="other">
+            <label for="other">Other</label>
+        </fieldset>
+        <br>
+
+        <!-- Check Boxes -->
+        <fieldset>
+            <legend>Hobbies</legend>
+            <input type="checkbox" id="reading" name="hobbies" value="reading">
+            <label for="reading">Reading</label>
+            <br>
+            <input type="checkbox" id="traveling" name="hobbies" value="traveling">
+            <label for="traveling">Traveling</label>
+            <br>
+            <input type="checkbox" id="sports" name="hobbies" value="sports">
+            <label for="sports">Sports</label>
+        </fieldset>
+        <br>
+
+        <!-- Selection Box of size 3 -->
+        <label for="country">Select Your Country:</label>
+        <select id="country" name="country" size="3" required>
+            <option value="usa">United States</option>
+            <option value="uk">United Kingdom</option>
+            <option value="india">India</option>
+            <option value="canada">Canada</option>
+            <option value="australia">Australia</option>
+        </select>
+        <br><br>
+
+        <!-- Option Box -->
+        <label for="department">Department:</label>
+        <select id="department" name="department" required>
+            <option value="" disabled selected>Select your department</option>
+            <option value="scope">SCOPE</option>
+            <option value="sense">SENSE</option>
+            <option value="scheme">SCHEME</option>
+        </select>
+        <br><br>
+
+        <!-- TextArea Box -->
+        <label for="comments">Comments:</label>
+        <textarea id="comments" name="comments" rows="5" cols="30" placeholder="Enter your comments here"></textarea>
+        <br><br>
+
+        <!-- Datalist -->
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" list="cities" placeholder="Choose your city">
+        <datalist id="cities">
+            <option value="New York">
+            <option value="London">
+            <option value="Mumbai">
+            <option value="Sydney">
+            <option value="Toronto">
+        </datalist>
+        <br><br>
+
+        <!-- Submit Button -->
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
