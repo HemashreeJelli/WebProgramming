@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Home Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #a3c9f1, #7fb6d8);
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      color: #ffffff;
+      text-align: center;
+      font-size: 16px;
+      background-color: #4CAF50;
+      padding: 10px;
+    }
+
+    h2 {
+      color: green;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .text {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      margin: 20px;
+    }
+
+    .text img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+      border: 3px solid #ccc;
+      margin-right: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .text img:hover {
+      transform: scale(1.1);
+      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .vertical-text-box {
+      position: relative;
+      width: 100px;
+      height: 150px;
+      overflow: hidden;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-size: 18px;
+      color: #333;
+      font-weight: bold;
+      background-color: #ffffff;
+      border: 2px solid #ccc;
+      margin: 20px auto;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .vertical-text-box:hover {
+      overflow: visible;
+      height: auto;
+    }
+
+    .vertical-text-box span {
+      display: inline-block;
+    }
+
+    div {
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      margin: 15px;
+    }
+
+    p {
+      font-size: 12px;
+      text-align: justify;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Hemashree Jelli</h1>
+  <h2>Cogito, ergo sum</h2>
+
+  <div class="text">
+    <div class="image-container">
+      <img src="Media/picccc.jpg" alt="Hemashree Jelli">
+    </div>
+    <div>
+      <h2>Introduction</h2>
+      <p>
+        Hi, I’m Hemashree Jelli, a B.Tech student at <strong>VIT University</strong>, pursuing CSE with a specialization in <b>Bioinformatics</b>.
+      The blend of technology and biology has always fascinated me, and I’m thrilled to be exploring how they come together to solve real-world problems.
+      Whether it’s decoding data or uncovering the mysteries of genomes, I’m passionate about this field and excited about the possibilities it holds. 
+      <em>Bioinformatics</em> is an exciting frontier for merging technology and life sciences.
+      </p>
+    </div>
+  </div>
+
+  <div>
+    <h2>Hobbies and Interests</h2>
+    <p>
+        When I’m not immersed in coursework, I find joy in my creative outlets and hobbies. <em>Reading</em> transports me to new worlds, and <strong>swimming</strong> is
+        my way to relax and recharge. I enjoy <span style="font-weight: bold; color: #15065b;">painting</span> and <mark>designing</mark> as a way to express myself—it’s
+       incredible how a blank canvas or screen can transform into something unique. <mark>Badminton</mark> is another passion of mine; it’s a fun way to stay active and 
+       challenge myself.
+    </p>
+  </div>
+
+  <div>
+    <h2>About Me</h2>
+    <p>
+        For me, life is all about exploring different sides of myself, from the <span style="font-style: italic;">logical and analytical</span> to the <span style="color: #d35400;">creative and playful</span>. 
+        Balancing academics with hobbies keeps me grounded and motivated. 
+        Whether it's <span style="font-weight: bold;">coding</span>, swimming, or designing, I always give it my all. 
+    </p>
+  </div>
+
+  <!-- Vertical Text with Overflow Effect -->
+  <div class="vertical-text-box">
+    <span>(Vertical text) Hover over the element. This is the complete content and it extends further.</span>
+  </div>
+
+</body>
+
+</html>
