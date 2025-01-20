@@ -1,0 +1,136 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f9fc;
+    color: #333;
+}
+
+.banner {
+    background: url('Media/gradient.jpg') no-repeat center center/cover;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.banner-text {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+nav {
+    background: #2c3e50;
+    padding: 10px;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s, background 0.3s;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+nav a:hover {
+    background: #3498db;
+    color: white;
+}
+
+
+main {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.content-section {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+}
+
+.activities {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.activities section, .blog {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.blog {
+    flex: 1;
+}
+
+footer {
+    background: #2c3e50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+footer form {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+footer input, footer textarea, footer button {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+}
+
+footer button {
+    background: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+footer button:hover {
+    background: #2980b9;
+}
+
+/* Box Model and Responsive Design */
+.activities section, .blog {
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid #ccc;
+}
+
+@media (max-width: 768px) {
+    .content-section {
+        flex-direction: column;
+    }
+
+    .activities, .blog {
+        flex: 1;
+    }
+}
