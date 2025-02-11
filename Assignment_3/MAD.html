@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Max, Ascending, and Descending</title>
+</head>
+
+<body>
+
+    <script>
+        function findMaxAscendingDescending(num1, num2, num3) {
+            let maxNum = Math.max(num1, num2, num3);
+
+            let digits = [num1, num2, num3];
+
+            let ascending = digits.slice().sort((a, b) => a - b).join(",");
+
+            let descending = digits.slice().sort((a, b) => b - a).join(",");
+
+            return {
+                maxNumber: maxNum,
+                longestAscending: ascending,
+                longestDescending: descending
+            };
+        }
+
+        function getUserInputAndFindSequences() {
+            let num1 = parseInt(prompt("Enter first number:"));
+            let num2 = parseInt(prompt("Enter second number:"));
+            let num3 = parseInt(prompt("Enter third number:"));
+
+            if (isNaN(num1) || isNaN(num2) || isNaN(num3)) {
+                alert("Invalid input! Please enter valid numbers.");
+                return;
+            }
+
+            let result = findMaxAscendingDescending(num1, num2, num3);
+
+            alert(
+                `Maximum Number: ${result.maxNumber}\n` +
+                `Longest Ascending Sequence: ${result.longestAscending}\n` +
+                `Longest Descending Sequence: ${result.longestDescending}`
+            );
+        }
+
+        // Run the function automatically when the page loads
+        getUserInputAndFindSequences();
+    </script>
+
+</body>
+</html>

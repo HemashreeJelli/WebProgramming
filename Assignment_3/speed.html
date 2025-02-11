@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed Limit Checker</title>
+</head>
+<body>
+
+    <script>
+        function checkSpeed(speed) {
+            if (speed <= 70) {
+                alert(`Speed=${speed}\nGood Safe Driving`);
+            } else {
+                let penaltyPoints = Math.floor((speed - 70) / 5);
+
+                if (speed > 120) {
+                    alert(`Speed=${speed}\nLicense Suspended`);
+                } else {
+                    alert(`Speed=${speed}\nSpeed Limit Crossed by Penalty Points: ${penaltyPoints}`);
+                }
+            }
+        }
+
+        function getUserInput() {
+            let speed = parseFloat(prompt("Enter your speed (in km/h):"));
+
+            if (isNaN(speed) || speed < 0) {
+                alert("Invalid input! Please enter a valid speed.");
+                return;
+            }
+
+            checkSpeed(speed);
+        }
+        getUserInput();
+    </script>
+</body>
+</html>

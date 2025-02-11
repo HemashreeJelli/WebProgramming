@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ODD/EVEN</title>
+</head>
+
+<body>
+
+    <script>
+        function checkOddEven(num) {
+            if (num % 2 === 0) {
+                return "Even";
+            } else {
+                return "Odd";
+            }
+        }
+
+        function getUserInput() {
+            let num1 = parseInt(prompt("Enter first number:"));
+            let num2 = parseInt(prompt("Enter second number:"));
+            let num3 = parseInt(prompt("Enter third number:"));
+
+            if (isNaN(num1) || isNaN(num2) || isNaN(num3)) {
+                alert("Invalid input! Please enter valid numbers.");
+                return;
+            }
+
+            let result1 = checkOddEven(num1);
+            let result2 = checkOddEven(num2);
+            let result3 = checkOddEven(num3);
+
+            alert(
+                `${num1} is: ${result1}\n` +
+                `${num2} is: ${result2}\n` +
+                `${num3} is: ${result3}`
+            );
+        }
+        getUserInput();
+    </script>
+
+</body>
+
+</html>

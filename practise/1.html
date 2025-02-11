@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebProgramming</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f9fc;
+            color: #333;
+        }
+
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+
+        a {
+            text-decoration: none;
+            color: #3498db;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        header {
+            background: #3498db;
+            color: white;
+            text-align: center;
+            padding: 20px 10px;
+        }
+
+        header p {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        nav {
+            background: #2c3e50;
+            padding: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #f39c12;
+        }
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .content-section {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .activities {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .activities section {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog {
+            flex: 1;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer form {
+            margin: 0 auto;
+            max-width: 400px;
+            text-align: left;
+        }
+
+        footer label {
+            display: block;
+            margin: 8px 0 4px;
+            font-size: 0.9em;
+        }
+
+        footer input, footer textarea, footer button {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        footer button {
+            background: #3498db;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        footer button:hover {
+            background: #2980b9;
+        }
+        @media (max-width: 768px) {
+            .content-section {
+                flex-direction: column;
+            }
+
+            .activities, .blog {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Web Programming</h1>
+        <p>A place to showcase my progress throughout the class and keep track of the various links. It utilizes a very minimal blue theme.</p>
+    </header>
+
+    
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#act1a">Act 1A</a></li>
+            <li><a href="#act1b">Act 1B</a></li>
+            <li><a href="#act1c">Act 1C</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    
+    <main id="home">
+
+        <div class="content-section">
+            <div class="activities">
+                <section id="act1a">
+                    <h2>Activities - 1A</h2>
+                    <ul>
+                        <li><a href="Assignment_1/home.html">Home (Activity1)</a></li>
+                        <li><a href="Assignment_1/list.html">List (Activity2)</a></li>
+                        <li><a href="Assignment_1/table.html">Table (Activity3)</a></li>
+                    </ul>
+                </section>
+
+                <section id="act1b">
+                    <h2>Activities - 1B</h2>
+                    <ul>
+                        <li><a href="Assignment_1/difference.html">Common Differences (Activity4)</a></li>
+                        <li><a href="index.html">Web Hosting (Activity5)</a></li>
+                    </ul>
+                </section>
+
+                <section id="act1c">
+                    <h2>Activities - 1C</h2>
+                    <ul>
+                        <li><a href="Assignment_1/Activity 6/SignIn.html">SignIn/SignUp (Activity6)</a></li>
+                        <li><a href="Assignment_1/home_act7.html">Home with div&span (Activity7)</a></li>
+                    </ul>
+                </section>
+            </div>
+
+            <aside class="blog" id="blog">
+                <h2>Blog</h2>
+                <p>Useful Links:</p>
+                <ul>
+                    <li><a href="https://github.com/HemashreeJelli/WebProgramming">GitHub Link</a></li>
+                </ul>
+                <h3>WebHosting Video</h3>
+                <a href="Assignment_1/Media/GitHub Dashboard - Google Chrome 2025-01-08 19-37-47.mp4" target="_blank">
+                    <video width="100%" controls loop muted>
+                        <source src="Assignment_1/Media/GitHub Dashboard - Google Chrome 2025-01-08 19-37-47.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </a>
+            </>
+        </div>
+    </main>
+
+    <footer id="contact">
+        <h2>Contact Us</h2>
+        <form action="/submit-contact" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </footer>
+</body>
+</html>
