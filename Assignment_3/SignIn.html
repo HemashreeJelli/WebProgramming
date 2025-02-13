@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-In Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .signin-container {
+            padding: 40px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            border-radius: 8px;
+        }
+        .signin-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .error-message {
+            color: red;
+            font-size: 12px;
+            display: none;
+        }
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button.signin {
+            background-color: #007bff;
+            color: #fff;
+        }
+        button.reset {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .signup-link {
+            margin-top: 15px;
+            text-align: center;
+        }
+        .signup-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+        .forgot-password {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .forgot-password a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="signin-container">
+        <h2>Sign In</h2>
+        <form id="signinForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username">
+                <div id="usernameError" class="error-message">Username is required.</div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password">
+                <div id="passwordError" class="error-message">Password is required.</div>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="signin">Sign In</button>
+                <button type="reset" class="reset">Reset</button>
+            </div>
+            <div class="signup-link">
+                Don't have an account? <a href="SignUp.html">Sign Up</a>
+            </div>
+            <div class="forgot-password">
+                <a href="#">Forgot Password?</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("signinForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevents form submission
+
+            let isValid = true;
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+            // Reset error messages
+            document.getElementById("usernameError").style.display = "none";
+            document.getElementById("passwordError").style.display = "none";
+
+            if (username === "") {
+                document.getElementById("usernameError").style.display = "block";
+                isValid = false;
+            }
+            if (password === "") {
+                document.getElementById("passwordError").style.display = "block";
+                isValid = false;
+            }
+
+            if (isValid) {
+                alert("Login successful!");
+            }
+        });
+    </script>
+</body>
+</html>

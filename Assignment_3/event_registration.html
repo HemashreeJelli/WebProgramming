@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .form-container {
+            padding: 40px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            border-radius: 8px;
+        }
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="email"], input[type="tel"], textarea, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .radio-group, .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .radio-group input, .checkbox-group input {
+            margin-right: 10px;
+        }
+        .error-message {
+            color: red;
+            font-size: 12px;
+            display: none;
+        }
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button.submit {
+            background-color: #007bff;
+            color: #fff;
+        }
+        button.reset {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Event Registration</h2>
+        <form id="registrationForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username">
+                <div id="usernameError" class="error-message">Enter a valid username (letters only).</div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email">
+                <div id="emailError" class="error-message">Enter a valid email.</div>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone">
+                <div id="phoneError" class="error-message">Enter a valid phone number.</div>
+            </div>
+
+            <fieldset>
+                <legend>Gender</legend>
+                <div class="radio-group">
+                    <input type="radio" id="male" name="gender" value="male">
+                    <label for="male">Male</label>
+                </div>
+                <div class="radio-group">
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">Female</label>
+                </div>
+                <div class="radio-group">
+                    <input type="radio" id="other" name="gender" value="other">
+                    <label for="other">Other</label>
+                </div>
+                <div id="genderError" class="error-message">Please select a gender.</div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Hobbies</legend>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="reading" name="hobbies" value="reading">
+                    <label for="reading">Reading</label>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="traveling" name="hobbies" value="traveling">
+                    <label for="traveling">Traveling</label>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="sports" name="hobbies" value="sports">
+                    <label for="sports">Sports</label>
+                </div>
+                <div id="hobbiesError" class="error-message">Please select at least one hobby.</div>
+            </fieldset>
+
+            <div class="form-group">
+                <label for="comments">Comments</label>
+                <textarea id="comments" name="comments" rows="3" placeholder="Enter your comments"></textarea>
+                <div id="commentsError" class="error-message">Comments cannot be empty.</div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="submit">Submit</button>
+                <button type="reset" class="reset">Reset</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("registrationForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let isValid = true;
+            const usernamePattern = /^[A-Za-z]+$/;
+            const username = document.getElementById("username").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const phonePattern = /^[0-9]{10}$/;
+            const genderChecked = document.querySelector("input[name='gender']:checked");
+            const hobbiesChecked = document.querySelectorAll("input[name='hobbies']:checked").length > 0;
+            const comments = document.getElementById("comments").value.trim();
+            
+            document.getElementById("usernameError").style.display = usernamePattern.test(username) ? "none" : "block";
+            document.getElementById("emailError").style.display = emailPattern.test(email) ? "none" : "block";
+            document.getElementById("phoneError").style.display = phonePattern.test(phone) ? "none" : "block";
+            document.getElementById("genderError").style.display = genderChecked ? "none" : "block";
+            document.getElementById("hobbiesError").style.display = hobbiesChecked ? "none" : "block";
+            document.getElementById("commentsError").style.display = comments !== "" ? "none" : "block";
+            
+            if (usernamePattern.test(username) && emailPattern.test(email) && phonePattern.test(phone) && genderChecked && hobbiesChecked && comments !== "") {
+                alert("Registration successful!");
+            }
+        });
+    </script>
+</body>
+</html>

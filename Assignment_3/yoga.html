@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>International Yoga Day</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e3f2fd;
+            color: #333;
+            text-align: center;
+        }
+        header {
+            background: linear-gradient(90deg, #0288d1, #26c6da);
+            color: white;
+            padding: 20px;
+            font-size: 1.5em;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 350px;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s;
+        }
+        .slide.active {
+            opacity: 1;
+        }
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #bbb;
+            border-radius: 5px;
+        }
+        .password-display {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #0288d1;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>International Yoga Day - June 21st</header>
+    <div class="container">
+        <div class="slider-container">
+            <div class="slide active"><img src="https://a.storyblok.com/f/97382/2000x1500/4c15e1224b/cover-benefits-of-yoga-and-meditation.png/m/1122x910/smart/filters:quality(65)" alt="Yoga 1"></div>
+            <div class="slide"><img src="https://nutritionsource.hsph.harvard.edu/wp-content/uploads/2021/11/pexels-yan-krukov-8436601-copy-1024x768.jpg" alt="Yoga 2"></div>
+            <div class="slide"><img src="https://images.shiksha.com/mediadata/images/articles/1690284718phpoWwdGe.jpeg" alt="Yoga 3"></div>
+        </div>
+        <button onclick="toggleForm()">Register for Yoga Session</button>
+        <div id="registrationForm" class="form-container" style="display:none;">
+            <h2>Register Now</h2>
+            <form id="yogaForm" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label>Full Name:</label>
+                    <input type="text" id="name">
+                    <div class="error" id="nameError"></div>
+                </div>
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="email" id="email">
+                    <div class="error" id="emailError"></div>
+                </div>
+                <div class="form-group">
+                    <label>Category:</label>
+                    <select id="category">
+                        <option value="">Select</option>
+                        <option value="employee">Government Employee (25% Discount)</option>
+                        <option value="student">Student (50% Discount)</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <div class="error" id="categoryError"></div>
+                </div>
+                <button type="submit">Generate Bill</button>
+            </form>
+        </div>
+        <div id="billContainer" class="bill-container" style="display:none;">
+            <h2>Bill Details</h2>
+            <div id="billDetails"></div>
+            <div id="passwordDisplay" class="password-display"></div>
+        </div>
+    </div>
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[index].classList.add('active');
+        }
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }, 3000);
+        
+        function toggleForm() {
+            document.getElementById('registrationForm').style.display = 'block';
+        }
+        function generateRandomPassword() {
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+            let password = "";
+            for (let i = 0; i < 10; i++) {
+                password += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return password;
+        }
+        function validateForm(name, email, category) {
+            let valid = true;
+            document.getElementById('nameError').innerText = "";
+            document.getElementById('emailError').innerText = "";
+            document.getElementById('categoryError').innerText = "";
+            
+            const namePattern = /^[A-Za-z ]+$/;
+            if (!name.match(namePattern)) {
+                document.getElementById('nameError').innerText = "Name must contain only letters and spaces.";
+                valid = false;
+            }
+            
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email.match(emailPattern)) {
+                document.getElementById('emailError').innerText = "Please enter a valid email address.";
+                valid = false;
+            }
+            
+            if (category === "") {
+                document.getElementById('categoryError').innerText = "Please select a category.";
+                valid = false;
+            }
+            return valid;
+        }
+        function handleSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const category = document.getElementById('category').value;
+            
+            if (!validateForm(name, email, category)) {
+                return;
+            }
+            let price = 200;
+            let discount = category === 'employee' ? 0.25 : category === 'student' ? 0.5 : 0;
+            let finalPrice = price - (price * discount);
+            document.getElementById('billDetails').innerHTML = `
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Category:</strong> ${category.charAt(0).toUpperCase() + category.slice(1)}</p>
+                <p><strong>Total:</strong> ₹${finalPrice}</p>
+            `;
+            document.getElementById('passwordDisplay').innerHTML = `Generated Password: ${generateRandomPassword()}`;
+            document.getElementById('billContainer').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

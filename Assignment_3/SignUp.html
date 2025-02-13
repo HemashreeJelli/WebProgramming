@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-Up Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .signup-container {
+            padding: 50px;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            border-radius: 8px;
+        }
+        .signup-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button.signup {
+            background-color: #007bff;
+            color: #fff;
+        }
+        button.reset {
+            background-color: #007bff;
+            color: #fff;
+        }
+        .terms {
+            display: flex;
+            align-items: center;
+        }
+        .terms input {
+            margin-right: 5px;
+        }
+        .signin-link {
+            margin-top: 15px;
+            text-align: center;
+        }
+        .signin-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .signin-link a:hover {
+            text-decoration: underline;
+        }
+        .error-message {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Sign Up</h2>
+        <form id="signupForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username">
+                <p id="username-error" class="error-message"></p>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email">
+                <p id="email-error" class="error-message"></p>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password">
+                <p id="password-error" class="error-message"></p>
+            </div>
+            <div class="form-group">
+                <label for="retype-password">Retype Password</label>
+                <input type="password" id="retype-password" name="retype-password">
+                <p id="retype-password-error" class="error-message"></p>
+            </div>
+            <div class="form-group terms">
+                <input type="checkbox" id="terms" name="terms">
+                <label for="terms">I agree to the Terms and Conditions</label>
+                <p id="terms-error" class="error-message"></p>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="signup">Sign Up</button>
+                <button type="reset" class="reset">Reset</button>
+            </div>
+        </form>
+        <div class="signin-link">
+            Already have an account? <a href="SignIn.html">Sign In</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+            let isValid = true;
+            let username = document.getElementById("username").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let password = document.getElementById("password").value.trim();
+            let confirmPassword = document.getElementById("retype-password").value.trim();
+            let terms = document.getElementById("terms").checked;
+
+            document.getElementById("username-error").textContent = username === "" ? "Username is required." : "";
+            document.getElementById("email-error").textContent = email === "" ? "Email is required." : "";
+            document.getElementById("password-error").textContent = password === "" ? "Password is required." : "";
+            document.getElementById("retype-password-error").textContent = confirmPassword === "" ? "Please retype your password." : "";
+            document.getElementById("terms-error").textContent = !terms ? "You must agree to the terms and conditions." : "";
+
+            if (password !== confirmPassword) {
+                document.getElementById("password-error").textContent = "Passwords do not match!";
+                isValid = false;
+            }
+
+            if (!username || !email || !password || !confirmPassword || !terms) {
+                isValid = false;
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+            } else {
+                alert("Sign-up successful! You can now log in.");
+                window.location.href = "SignIn.html";
+            }
+        });
+    </script>
+</body>
+</html>
