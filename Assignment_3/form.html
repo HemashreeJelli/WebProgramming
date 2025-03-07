@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+</head>
+
+<body>
+
+    <form id="studentForm">
+        <label for="degree">Degree:</label>
+        <select id="degree" required>
+            <option value="">Select Degree</option>
+            <option value="BTech">BTech</option>
+            <option value="MTech">MTech</option>
+            <option value="PhD">PhD</option>
+        </select>
+
+        <br><br>
+
+        <label for="course">Course:</label>
+        <select id="course" required>
+            <option value="">Select Course</option>
+            <option value="BCB">BCB</option>
+            <option value="BCI">BCI</option>
+            <option value="BKT">BKT</option>
+        </select>
+
+        <br><br>
+
+        <label for="year">Year of Joining:</label>
+        <input type="number" id="year" min="2000" max="2099" required>
+
+        <br><br>
+
+        <label for="regNo">Registration Number:</label>
+        <input type="text" id="regNo" required>
+
+        <br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <p id="message" style="color: red;"></p>
+
+    <script>
+        document.getElementById("studentForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            let degree = document.getElementById("degree").value;
+            let course = document.getElementById("course").value;
+            let year = document.getElementById("year").value;
+            let regNo = document.getElementById("regNo").value;
+            let message = document.getElementById("message");
+
+            message.textContent = "";
+
+            if (!degree || !course || !year || !regNo) {
+                message.textContent = "All fields are required.";
+                return;
+            }
+
+            let yearShort = year.slice(-2);
+            let regex = new RegExp(`^${yearShort}${course}[0-9]{4}$`);
+
+            if (!regex.test(regNo)) {
+                message.textContent = `Reg No format is incorrect. Expected: ${yearShort}${course}XXXX (where XXXX is a number 0001-9999).`;
+                return;
+            }
+
+            let uniqueNumber = parseInt(regNo.slice(-4));
+
+            if (uniqueNumber === 0) {
+                message.textContent = "Last 4 digits cannot be 0000.";
+                return;
+            }
+
+            message.style.color = "green";
+            message.textContent = "Form submitted successfully!";
+        });
+    </script>
+
+</body>
+
+</html>

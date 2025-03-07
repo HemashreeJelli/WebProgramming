@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Rock-Paper-Scissors</title>
+<style>
+#game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%; /* Increased width for two players */
+  margin: 0 auto;
+  text-align: center;
+}
+
+#userChoice, #player2Choice { /* Style both choice sections */
+  margin-bottom: 20px;
+}
+
+#userChoice button, #player2Choice button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+#result, #score {
+  margin-top: 20px;
+}
+</style>
+</head>
+<body>
+  <h1>Rock-Paper-Scissors (Two Players)</h1>
+  <div id="game">
+    <div id="userChoice">
+      <h2>Player 1 Choice:</h2>
+      <button id="rock1">Rock</button>
+      <button id="paper1">Paper</button>
+      <button id="scissors1">Scissors</button>
+    </div>
+    <div id="player2Choice">
+      <h2>Player 2 Choice:</h2>
+      <button id="rock2">Rock</button>
+      <button id="paper2">Paper</button>
+      <button id="scissors2">Scissors</button>
+    </div>
+    <div id="result">
+      <h2>Result:</h2>
+      <p id="outcome"></p>
+    </div>
+    <div id="score">
+      <h2>Score:</h2>
+      <p>Player 1: <span id="player1Score">0</span>  Player 2: <span id="player2Score">0</span></p>
+    </div>
+  </div>
+
+  <script>
+    const choices = ["rock", "paper", "scissors"];
+    let player1Score = 0;
+    let player2Score = 0;
+
+    const player1Buttons = document.querySelectorAll('#userChoice button');
+    const player2Buttons = document.querySelectorAll('#player2Choice button');
+    const outcome = document.getElementById('outcome');
+    const player1ScoreDisplay = document.getElementById('player1Score');
+    const player2ScoreDisplay = document.getElementById('player2Score');
+    let player1Choice;
+    let player2Choice;
+
+    // Disable Player 2 buttons until Player 1 makes a choice.
+    player2Buttons.forEach(button => button.disabled = true);
+
+    player1Buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        player1Choice = button.id.substring(0, button.id.length-1); //Remove the trailing number
+        player2Buttons.forEach(button => button.disabled = false); //Enable Player 2 buttons
+        player1Buttons.forEach(button => button.disabled = true); //Disable Player 1 buttons after selection
+      });
+    });
+
+
+    player2Buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        player2Choice = button.id.substring(0, button.id.length-1); //Remove the trailing number
+
+        let result = '';
+        if (player1Choice === player2Choice) {
+          result = "It's a tie!";
+        } else if (
+          (player1Choice === "rock" && player2Choice === "scissors") ||
+          (player1Choice === "paper" && player2Choice === "rock") ||
+          (player1Choice === "scissors" && player2Choice === "paper")
+        ) {
+          player1Score++;
+          result = `Player 1 wins! ${player1Choice} beats ${player2Choice}`;
+        } else {
+          player2Score++;
+          result = `Player 2 wins! ${player2Choice} beats ${player1Choice}`;
+        }
+
+        outcome.textContent = result;
+        player1ScoreDisplay.textContent = player1Score;
+        player2ScoreDisplay.textContent = player2Score;
+
+        //Re-enable buttons for the next round
+        player1Buttons.forEach(button => button.disabled = false);
+        player2Buttons.forEach(button => button.disabled = true);
+        player1Choice = null;
+        player2Choice = null;
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Representation</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #ffff;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .emoji-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 400px;
+            margin: 0 auto;
+            gap: 20px;
+        }
+        .emoji-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 10px;
+            transition: transform 0.2s ease-in-out, background-color 0.3s;
+        }
+        .emoji-item:hover {
+            transform: scale(1.1);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        .emoji-item img {
+            width: 60px;
+            height: 60px;
+        }
+        .emoji-item span {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 5px;
+        }
+        canvas {
+            border: 4px solid #333;
+            border-radius: 10px;
+            background-color: rgb(198, 183, 183);
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+        }
+        #emotionName {
+            font-size: 18px;
+            font-weight: bold;
+            color: #555;
+            margin-top: 10px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4850e8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+        button:hover {
+            background-color: #080755;
+        }
+    </style>
+</head>
+<body>
+    <h2>Basic Emotions</h2>
+
+    <div class="emoji-container" id="emojiContainer">
+        <div class="emoji-item" data-emotion="Joy" data-src="media/joy.png"><img src="media/joy.png" alt="Joy"><span>Joy</span></div>
+        <div class="emoji-item" data-emotion="Trust" data-src="media/trust.png"><img src="media/trust.png" alt="Trust"><span>Trust</span></div>
+        <div class="emoji-item" data-emotion="Fear" data-src="media/fear.png"><img src="media/fear.png" alt="Fear"><span>Fear</span></div>
+        <div class="emoji-item" data-emotion="Surprise" data-src="media/surprise.png"><img src="media/surprise.png" alt="Surprise"><span>Surprise</span></div>
+        <div class="emoji-item" data-emotion="Sadness" data-src="media/sadness.png"><img src="media/sadness.png" alt="Sadness"><span>Sadness</span></div>
+        <div class="emoji-item" data-emotion="Disgust" data-src="media/disgust.png"><img src="media/disgust.png" alt="Disgust"><span>Disgust</span></div>
+        <div class="emoji-item" data-emotion="Anger" data-src="media/anger.png"><img src="media/anger.png" alt="Anger"><span>Anger</span></div>
+        <div class="emoji-item" data-emotion="Anticipation" data-src="media/anticipation.png"><img src="media/anticipation.png" alt="Anticipation"><span>Anticipation</span></div>
+    </div>
+    
+    <canvas id="emotionCanvas" width="200" height="200"></canvas>
+    <div id="emotionName">Hover over an emotion</div>
+    <br>
+    <button onclick="clearCanvas()">Clear</button>
+
+    <script>
+        let canvas = document.getElementById('emotionCanvas');
+        let ctx = canvas.getContext('2d');
+        let emotionName = document.getElementById('emotionName');
+        let emojiContainer = document.getElementById('emojiContainer');
+
+        // Function to update the canvas with the selected emotion
+        function setEmotion(imageSrc, emotion) {
+            let img = new Image();
+            img.src = imageSrc;
+            img.onload = function() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 50, 50, 100, 100);
+                emotionName.innerText = `Current Emotion: ${emotion}`;
+            };
+        }
+
+        // Event listener for hovering over an emotion
+        emojiContainer.addEventListener('mouseover', function(event) {
+            let target = event.target.closest('.emoji-item');
+            if (target) {
+                let imageSrc = target.getAttribute('data-src');
+                let emotion = target.getAttribute('data-emotion');
+                setEmotion(imageSrc, emotion);
+            }
+        });
+
+        // Event listener for clicking an emotion
+        emojiContainer.addEventListener('click', function(event) {
+            let target = event.target.closest('.emoji-item');
+            if (target) {
+                let imageSrc = target.getAttribute('data-src');
+                let emotion = target.getAttribute('data-emotion');
+                setEmotion(imageSrc, emotion);
+            }
+        });
+
+        // Function to clear the canvas
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            emotionName.innerText = "Hover over an emotion";
+        }
+    </script>
+</body>
+</html>

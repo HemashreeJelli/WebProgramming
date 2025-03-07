@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Cactus Drawing</title>
+</head>
+<body>
+    <canvas id="cactusCanvas" width="400" height="500"></canvas>
+
+    <script>
+        const canvas = document.getElementById("cactusCanvas");
+        const ctx = canvas.getContext("2d");
+
+        // Background
+        ctx.fillStyle = "#FFE4C4";  
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Sun (Upper Half - White)
+        ctx.fillStyle = "#FFFFFF";  
+        ctx.beginPath();
+        ctx.arc(200, 100, 50, Math.PI, 0);
+        ctx.fill();
+
+        // Sun (Lower Half - Gray)
+        ctx.fillStyle = "#B0BEC5";  
+        ctx.beginPath();
+        ctx.arc(200, 110, 50, Math.PI, 0, true);  // Reversed direction
+        ctx.fill();
+
+
+        // Flower Pot
+        ctx.fillStyle = "#E57373"; // Fill color
+        ctx.beginPath();
+        ctx.moveTo(100, 400);
+        ctx.lineTo(270, 400);
+        ctx.lineTo(230, 450);
+        ctx.lineTo(120, 450);
+        ctx.closePath();
+        ctx.fill(); // Fill the shape
+
+        // Add Border
+        ctx.strokeStyle = "#000000"; // Darker red for contrast
+        ctx.lineWidth = 0.7; // Border thickness
+        ctx.stroke(); // Apply stroke to outline the pot
+
+        ctx.fillStyle = "#8b0000"; // Fill color
+        ctx.beginPath();
+        ctx.moveTo(270, 400);
+        ctx.lineTo(300, 400);
+        ctx.lineTo(280, 450);
+        ctx.lineTo(230, 450);
+        ctx.closePath();
+        ctx.fill();
+
+        // Add Border
+        ctx.strokeStyle = "#000000"; // Darker red for contrast
+        ctx.lineWidth = 0.7; // Border thickness
+        ctx.stroke(); // Apply stroke to outline the pot
+
+        // Function to generate random dots within a triangular leaf
+function drawRandomDots(x1, y1, x2, y2, x3, y3, count) {
+    ctx.fillStyle = "#FFFFFF"; // White dots
+
+    for (let i = 0; i < count; i++) {
+        let r1 = Math.random(), r2 = Math.random();
+        if (r1 + r2 > 1) { // Keep dots inside the triangle
+            r1 = 1 - r1;
+            r2 = 1 - r2;
+        }
+
+        let x = x1 + r1 * (x2 - x1) + r2 * (x3 - x1);
+        let y = y1 + r1 * (y2 - y1) + r2 * (y3 - y1);
+
+        ctx.beginPath();
+        ctx.arc(x, y, 3, 0, 2 * Math.PI);
+        ctx.fill();
+    }
+}
+
+        // Leftmost leaf (smaller)
+        ctx.fillStyle = "rgba(77, 182, 172, 0.6)";
+        ctx.beginPath();
+        ctx.moveTo(120, 400);  // Bottom left
+        ctx.lineTo(90, 350);  // Top point
+        ctx.lineTo(170, 400);  // Bottom right
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // Random dots on left leaf
+        drawRandomDots(120, 400, 90, 350, 170, 400, 5); // 5 dots
+
+        // Middle leaf (Tallest)
+        ctx.fillStyle = "rgba(129, 199, 132, 0.6)";
+        ctx.beginPath();
+        ctx.moveTo(125, 400);
+        ctx.lineTo(135, 310);
+        ctx.lineTo(175, 400);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // Random dots on middle leaf
+        drawRandomDots(125, 400, 135, 310, 175, 400, 7); // 7 dots
+
+        // Rightmost leaf
+        ctx.fillStyle = "rgba(77, 182, 172, 0.6)";
+        ctx.beginPath();
+        ctx.moveTo(130, 400);
+        ctx.lineTo(180, 330);
+        ctx.lineTo(180, 400);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        // Random dots on right leaf
+        drawRandomDots(130, 400, 180, 330, 180, 400, 5); // 5 dots
+
+        /// Cactus (Main Body)
+        ctx.fillStyle = "#43A047"; // Green color
+        ctx.beginPath();
+        ctx.moveTo(220, 400); // Bottom left
+        ctx.lineTo(220, 300); // Left vertical
+        ctx.arc(250, 300, 30, Math.PI, 0, false); // Rounded top
+        ctx.lineTo(280, 400); // Right vertical
+        ctx.closePath();
+        ctx.fill();
+
+        // Add Border
+        ctx.strokeStyle = "#000000"; // Darker red for contrast
+        ctx.lineWidth = 0.7; // Border thickness
+        ctx.stroke(); // Apply stroke to outline the pot
+
+        // Cactus (Center Ridge)
+        ctx.fillStyle = "#66BB6A"; // Lighter green for the center
+        ctx.beginPath();
+        ctx.moveTo(238, 400); // Move slightly left for a wider base
+        ctx.lineTo(238, 400); // Left vertical line (wider)
+        ctx.arc(250, 280, 12, Math.PI, 0, false); // Increase radius for a thicker ridge
+        ctx.lineTo(260, 400); // Move right for a wider base
+        ctx.closePath();
+        ctx.fill();
+
+        // Add Border
+        ctx.strokeStyle = "#000000"; // Darker red for contrast
+        ctx.lineWidth = 0.7; // Border thickness
+        ctx.stroke(); // Apply stroke to outline the pot
+
+        // Cactus Spines (Left and Right)
+        ctx.strokeStyle = "#000000"; // Black spines
+        ctx.lineWidth = 1;
+        const spineSpacing = 15; // Space between spines
+
+        for (let y = 300; y <= 390; y += spineSpacing) { // Now starts from the rounded top
+            // Left Side Spines
+            ctx.beginPath();
+            ctx.moveTo(220, y);
+            ctx.lineTo(210, y);
+            ctx.stroke();
+
+            // Right Side Spines
+            ctx.beginPath();
+            ctx.moveTo(280, y);
+            ctx.lineTo(290, y);
+            ctx.stroke();
+        }
+        // Cactus Top Spines (On the Curve)
+        for (let angle = Math.PI; angle <= 2 * Math.PI; angle += Math.PI / 6) {
+            let x = 250 + 30 * Math.cos(angle); // Get x on the arc
+            let y = 300 + 30 * Math.sin(angle); // Get y on the arc
+
+            let spineX = x + 10 * Math.cos(angle); // Extend spine outward
+            let spineY = y + 10 * Math.sin(angle);
+
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(spineX, spineY);
+            ctx.stroke();
+        }
+        // Center Dotted Line (Ridge Spines)
+        ctx.fillStyle = "#000000"; // Ensure black color for visibility
+        for (let y = 275; y <= 400; y += 10) { // Spacing remains the same
+            ctx.beginPath();
+            ctx.arc(250, y, 0.5, 0, 2 * Math.PI); // Increase size for better visibility
+            ctx.fill();
+        }
+    </script>
+</body>
+</html>

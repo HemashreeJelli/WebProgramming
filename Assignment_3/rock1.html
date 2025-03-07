@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Rock-Paper-Scissors</title>
+<style>
+#game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#modeSelection, #userChoice, #player2Choice {
+  margin-bottom: 20px;
+}
+
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+}
+
+#result, #score {
+  margin-top: 20px;
+}
+</style>
+</head>
+<body>
+  <h1>Rock-Paper-Scissors</h1>
+  <div id="game">
+    <div id="modeSelection">
+      <h2>Select Game Mode:</h2>
+      <select id="gameMode">
+        <option value="single" selected>Single Player (vs. Computer)</option>
+        <option value="twoPlayer">Two Player</option>
+      </select>
+    </div>
+    <div id="userChoice" style="display:block;">  <!-- Initially visible -->
+      <h2>Your Choice / Player 1 Choice:</h2>
+      <button id="rock1">Rock</button>
+      <button id="paper1">Paper</button>
+      <button id="scissors1">Scissors</button>
+    </div>
+    <div id="player2Choice" style="display:none;"> 
+      <h2>Player 2 Choice:</h2>
+      <button id="rock2">Rock</button>
+      <button id="paper2">Paper</button>
+      <button id="scissors2">Scissors</button>
+    </div>
+    <div id="computerChoice" style="display:block;">  <!-- Initially visible -->
+        <h2>Computer Choice:</h2>
+        <p id="computerChoiceDisplay"></p>
+    </div>
+    <div id="result">
+      <h2>Result:</h2>
+      <p id="outcome"></p>
+    </div>
+    <div id="score">
+      <h2>Score:</h2>
+      <p id="scoreDisplay"></p>
+    </div>
+  </div>
+
+  <script>
+    const choices = ["rock", "paper", "scissors"];
+    let gameMode = "single"; // Default to single player
+    let player1Score = 0;
+    let player2Score = 0;
+    let computerScore = 0;
+    let player1Choice = null;
+    let player2Choice = null;
+
+
+    const gameModeSelect = document.getElementById('gameMode');
+    const userChoiceDiv = document.getElementById('userChoice');
+    const player2ChoiceDiv = document.getElementById('player2Choice');
+    const computerChoiceDiv = document.getElementById('computerChoice');
+    const player1Buttons = document.querySelectorAll('#userChoice button');
+    const player2Buttons = document.querySelectorAll('#player2Choice button');
+    const outcome = document.getElementById('outcome');
+    const scoreDisplay = document.getElementById('scoreDisplay');
+    const computerChoiceDisplay = document.getElementById('computerChoiceDisplay');
+
+    gameModeSelect.addEventListener('change', () => {
+      gameMode = gameModeSelect.value;
+      userChoiceDiv.style.display = gameMode === 'single' || gameMode === 'twoPlayer' ? 'block' : 'none';
+      player2ChoiceDiv.style.display = gameMode === 'twoPlayer' ? 'block' : 'none';
+      computerChoiceDiv.style.display = gameMode === 'single' ? 'block' : 'none';
+      player1Score = 0;
+      player2Score = 0;
+      computerScore = 0;
+      player1Choice = null;
+      player2Choice = null;
+      updateScoreDisplay();
+      outcome.textContent = '';
+      player1Buttons.forEach(button => button.disabled = false);
+      player2Buttons.forEach(button => button.disabled = true);
+    });
+
+    function updateScoreDisplay() {
+      if (gameMode === 'single') {
+        scoreDisplay.innerHTML = `User: ${player1Score} Computer: ${computerScore}`;
+      } else if (gameMode === 'twoPlayer') {
+        scoreDisplay.innerHTML = `Player 1: ${player1Score} Player 2: ${player2Score}`;
+      }
+    }
+
+    function playSinglePlayer(player1Choice) {
+      const computerChoice = choices[Math.floor(Math.random() * 3)];
+      computerChoiceDisplay.textContent = computerChoice;
+      let result = '';
+      if (player1Choice === computerChoice) {
+        result = "It's a tie!";
+      } else if (
+        (player1Choice === "rock" && computerChoice === "scissors") ||
+        (player1Choice === "paper" && computerChoice === "rock") ||
+        (player1Choice === "scissors" && computerChoice === "paper")
+      ) {
+        player1Score++;
+        result = `You win! ${player1Choice} beats ${computerChoice}`;
+      } else {
+        computerScore++;
+        result = `You lose! ${computerChoice} beats ${player1Choice}`;
+      }
+      outcome.textContent = result;
+      updateScoreDisplay();
+    }
+
+    function playTwoPlayer(player1Choice, player2Choice) {
+      let result = '';
+      if (player1Choice === player2Choice) {
+        result = "It's a tie!";
+      } else if (
+        (player1Choice === "rock" && player2Choice === "scissors") ||
+        (player1Choice === "paper" && player2Choice === "rock") ||
+        (player1Choice === "scissors" && player2Choice === "paper")
+      ) {
+        player1Score++;
+        result = `Player 1 wins! ${player1Choice} beats ${player2Choice}`;
+      } else {
+        player2Score++;
+        result = `Player 2 wins! ${player2Choice} beats ${player1Choice}`;
+      }
+      outcome.textContent = result;
+      updateScoreDisplay();
+      player1Choice = null;
+      player2Choice = null;
+      player1Buttons.forEach(button => button.disabled = false);
+      player2Buttons.forEach(button => button.disabled = true);
+    }
+
+
+    player1Buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        if (gameMode === null) return; 
+        player1Choice = button.id.substring(0, button.id.length - 1);
+        if (gameMode === 'single') {
+          playSinglePlayer(player1Choice);
+        } else if (gameMode === 'twoPlayer') {
+          player1Buttons.forEach(b => b.disabled = true);
+          player2Buttons.forEach(b => b.disabled = false);
+        }
+      });
+    });
+
+    player2Buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        if (gameMode === null) return; 
+        player2Choice = button.id.substring(0, button.id.length - 1);
+        if (player1Choice !== null && gameMode === 'twoPlayer') {
+          playTwoPlayer(player1Choice, player2Choice);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
